@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercici</title>
+</head>
+<body>
+    <form id="formulario" name="formulario" enctype="application/x-www-form-urlencoded" method="post" action="index.html" >
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre">
+
+        <label for="clase">Clase</label>
+        <input type="text" id="clase">
+
+
+        <button id="boton" type="button" >Aceptar</button>
+    </form>
+
+
+    <div class="panel">Lista de personajes</div>
+    
+        <script>
+
+
+
+
+let listChar = [];
+let $boton = document.getElementById("boton");
+let nombre;
+let clase;
+
+function addChar(nom, classi) {
+    let newChar = {
+        nombre: nom,
+        clase: classi
+    };
+
+    listChar.push(newChar);
+    console.log(newChar);
+    console.log(listChar);
+}
+
+function getChar() {
+    return listChar;
+}
+
+$boton.addEventListener("click", function() {
+    saveFriend();
+    renderizarLista();
+});
+
+function saveFriend() {
+    nombre = document.getElementById("nombre").value;
+    clase = document.getElementById("clase").value;
+    addChar(nombre, clase);
+}
+
+function renderizarLista() {
+    let lista = getChar(); // Asumiendo que getChar() devuelve una lista válida
+    let panel = document.querySelector(".panel");
+    panel.innerHTML = ''; // Limpia el panel antes de renderizar la nueva lista
+
+    console.log("Ha entrado la lista", lista);
+    console.log(panel);
+
+    lista.forEach(valor => {
+        let card = document.createElement('article');
+        card.classList.add('card'); // Añade una clase para estilizar
+
+        let char = document.createElement("h1");
+        let clase = document.createElement("p");
+
+        char.textContent = valor.nombre;
+        clase.textContent = valor.clase;
+
+        card.appendChild(char);
+        card.appendChild(clase);
+        panel.appendChild(card);
+    });
+}
+        </script>
+
+
+
+
+
+    </form>
+</body>
+</html>
